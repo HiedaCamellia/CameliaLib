@@ -44,7 +44,7 @@ public class TieredShapedRecipeBuilder implements RecipeBuilder {
     public TieredShapedRecipeBuilder(RecipeCategory category, List<ItemStack> result,List<Ingredient> tiered) {
         this.rows = Lists.newArrayList();
         this.key = Maps.newLinkedHashMap();
-        this.criteria = new LinkedHashMap();
+        this.criteria = new LinkedHashMap<>();
         this.showNotification = true;
         this.category = category;
         List<Item> results = new ArrayList<>();
@@ -133,7 +133,7 @@ public class TieredShapedRecipeBuilder implements RecipeBuilder {
 
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
         for(int i =0 ;i<this.tiered.size();i++){
-            ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(id.getNamespace(), id.getPath()+"_Tier"+i);
+            ResourceLocation resourceLocation = ResourceLocation.fromNamespaceAndPath(id.getNamespace(), id.getPath()+"_tier"+i);
             ShapedRecipePattern shapedrecipepattern = this.ensureValid(resourceLocation,i);
             Advancement.Builder advancement$builder = recipeOutput.advancement().addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(resourceLocation)).rewards(AdvancementRewards.Builder.recipe(resourceLocation)).requirements(AdvancementRequirements.Strategy.OR);
             Objects.requireNonNull(advancement$builder);
