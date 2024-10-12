@@ -1,4 +1,4 @@
-package org.hiedacamellia.camellialib.core.data;
+package org.hiedacamellia.camellialib.core.data.state;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
