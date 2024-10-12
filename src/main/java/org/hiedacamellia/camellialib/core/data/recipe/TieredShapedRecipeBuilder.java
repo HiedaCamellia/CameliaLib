@@ -28,9 +28,8 @@ import java.util.*;
 public class TieredShapedRecipeBuilder implements RecipeBuilder {
     private final List<Ingredient> tiered;
     private final RecipeCategory category;
-    private final Item result;
-    private final int count;
-    private final ItemStack resultStack;
+    private final List<Item> result;
+    private final List<ItemStack> resultStack;
     private final List<String> rows;
     private final Map<Character, Ingredient> key;
     private final Map<String, Criterion<?>> criteria;
@@ -38,39 +37,34 @@ public class TieredShapedRecipeBuilder implements RecipeBuilder {
     private String group;
     private boolean showNotification;
 
-    public TieredShapedRecipeBuilder(RecipeCategory category, ItemLike result,List<Ingredient> tiered, int count) {
-        this(category, new ItemStack(result, count),tiered);
+    public TieredShapedRecipeBuilder(RecipeCategory category, List<ItemLike> result,List<Ingredient> tiered, int count) {
+        this(category, getResultStack(result,count),tiered);
     }
 
-    public TieredShapedRecipeBuilder(RecipeCategory category, ItemStack result,List<Ingredient> tiered) {
+    public TieredShapedRecipeBuilder(RecipeCategory category, List<ItemStack> result,List<Ingredient> tiered) {
         this.rows = Lists.newArrayList();
         this.key = Maps.newLinkedHashMap();
         this.criteria = new LinkedHashMap();
         this.showNotification = true;
         this.category = category;
-        this.result = result.getItem();
-        this.count = result.getCount();
+        List<Item> results = new ArrayList<>();
+        result.forEach(itemStack -> {
+            results.add(itemStack.getItem());
+        });
+        this.result = results;
         this.resultStack = result;
         this.tiered = tiered;
     }
 
-    public static TieredShapedRecipeBuilder defaultTiered(RecipeCategory category, ItemLike result) {
-        return shaped(category, result,List.of(Ingredient.of(ItemTags.PLANKS)
-                ,Ingredient.of(Items.COBBLESTONE)
-                ,Ingredient.of(Items.IRON_INGOT)
-                ,Ingredient.of(Items.GOLD_INGOT)
-                ,Ingredient.of(Items.DIAMOND)), 1);
+    public static TieredShapedRecipeBuilder defaultTiered(RecipeCategory category, List<ItemLike> result) {
+        return defaultTiered(category, result, 1);
     }
 
-    public static TieredShapedRecipeBuilder defaultTiered(RecipeCategory category, ItemLike result, int count) {
-        return new TieredShapedRecipeBuilder(category, result,List.of(Ingredient.of(ItemTags.PLANKS)
-                ,Ingredient.of(Items.COBBLESTONE)
-                ,Ingredient.of(Items.IRON_INGOT)
-                ,Ingredient.of(Items.GOLD_INGOT)
-                ,Ingredient.of(Items.DIAMOND)), count);
+    public static TieredShapedRecipeBuilder defaultTiered(RecipeCategory category, List<ItemLike> result, int count) {
+        return defaultTieredI(category, getResultStack(result,count));
     }
 
-    public static TieredShapedRecipeBuilder defaultTiered(RecipeCategory category, ItemStack result) {
+    public static TieredShapedRecipeBuilder defaultTieredI(RecipeCategory category, List<ItemStack> result) {
         return new TieredShapedRecipeBuilder(category, result,List.of(Ingredient.of(ItemTags.PLANKS)
                 ,Ingredient.of(Items.COBBLESTONE)
                 ,Ingredient.of(Items.IRON_INGOT)
@@ -78,15 +72,15 @@ public class TieredShapedRecipeBuilder implements RecipeBuilder {
                 ,Ingredient.of(Items.DIAMOND)));
     }
 
-    public static TieredShapedRecipeBuilder shaped(RecipeCategory category, ItemLike result,List<Ingredient> tiered) {
+    public static TieredShapedRecipeBuilder shaped(RecipeCategory category, List<ItemLike> result,List<Ingredient> tiered) {
         return shaped(category, result,tiered, 1);
     }
 
-    public static TieredShapedRecipeBuilder shaped(RecipeCategory category, ItemLike result,List<Ingredient> tiered, int count) {
+    public static TieredShapedRecipeBuilder shaped(RecipeCategory category, List<ItemLike> result,List<Ingredient> tiered, int count) {
         return new TieredShapedRecipeBuilder(category, result,tiered, count);
     }
 
-    public static TieredShapedRecipeBuilder shaped(RecipeCategory category, ItemStack result,List<Ingredient> tiered) {
+    public static TieredShapedRecipeBuilder shapedI(RecipeCategory category, List<ItemStack> result,List<Ingredient> tiered) {
         return new TieredShapedRecipeBuilder(category, result,tiered);
     }
 
@@ -134,7 +128,7 @@ public class TieredShapedRecipeBuilder implements RecipeBuilder {
     }
 
     public Item getResult() {
-        return this.result;
+        return this.result.get(0);
     }
 
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
@@ -144,7 +138,7 @@ public class TieredShapedRecipeBuilder implements RecipeBuilder {
             Advancement.Builder advancement$builder = recipeOutput.advancement().addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(resourceLocation)).rewards(AdvancementRewards.Builder.recipe(resourceLocation)).requirements(AdvancementRequirements.Strategy.OR);
             Objects.requireNonNull(advancement$builder);
             this.criteria.forEach(advancement$builder::addCriterion);
-            ShapedRecipe shapedrecipe = new ShapedRecipe(Objects.requireNonNullElse(this.group, ""), RecipeBuilder.determineBookCategory(this.category), shapedrecipepattern, this.resultStack, this.showNotification);
+            ShapedRecipe shapedrecipe = new ShapedRecipe(Objects.requireNonNullElse(this.group, ""), RecipeBuilder.determineBookCategory(this.category), shapedrecipepattern, this.resultStack.get(i), this.showNotification);
             recipeOutput.accept(resourceLocation, shapedrecipe, advancement$builder.build(resourceLocation.withPrefix("recipes/" + this.category.getFolderName() + "/")));
         }
     }
@@ -159,4 +153,9 @@ public class TieredShapedRecipeBuilder implements RecipeBuilder {
         }
     }
 
+    public static List<ItemStack> getResultStack(List<ItemLike> result,int count){
+        List<ItemStack> stacks = new ArrayList<>();
+        result.forEach(item -> stacks.add(new ItemStack(item, count)));
+        return stacks;
+    }
 }
