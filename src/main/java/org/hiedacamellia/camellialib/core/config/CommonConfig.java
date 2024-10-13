@@ -9,7 +9,7 @@ public class CommonConfig {
 
     public static final ModConfigSpec.BooleanValue DEBUG = BUILDER
             .comment("Set to true to enable debug info")
-            .comment("设置为true以启用调试信息")
+            .comment("\u8bbe\u7f6e\u4e3atrue\u4ee5\u542f\u7528\u8c03\u8bd5\u4fe1\u606f")
             .define("debug", true);
 
     public static final ModConfigSpec SPEC = BUILDER.build();
