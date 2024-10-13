@@ -8,6 +8,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.hiedacamellia.camellialib.core.debug.CamelliaDebug;
@@ -33,23 +35,17 @@ public class ThrowableItemEntity extends ThrowableItemProjectile {
     }
 
     @Override
-    protected void onHit(HitResult result) {
-        super.onHit(result);
-        if (this.level().isClientSide()) return;
-        CamelliaDebug.send("onHit");
-    }
-
-
-    @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
-        if (this.level().isClientSide()) return;
-
         Entity entity = result.getEntity();
         CamelliaDebug.send(entity.toString());
+        if (this.level().isClientSide()) return;
         if (this.getOwner() instanceof Player player) {
             entity.hurt(damageSources().playerAttack(player), (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE));
         }
     }
 
+    @Override
+    protected void onHitBlock(BlockHitResult result) {
+    }
 }

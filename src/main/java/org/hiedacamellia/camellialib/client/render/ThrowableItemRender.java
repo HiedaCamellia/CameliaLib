@@ -1,7 +1,7 @@
 package org.hiedacamellia.camellialib.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.inventory.InventoryMenu;
 import org.hiedacamellia.camellialib.common.entity.ThrowableItemEntity;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
@@ -38,7 +38,7 @@ public class ThrowableItemRender extends EntityRenderer<ThrowableItemEntity> {
 
         ItemStack itemstack = entity.getItem();
         BakedModel bakedmodel = this.itemRenderer.getModel(itemstack, entity.level(), null, entity.getId());
-        this.itemRenderer.render(itemstack, ItemDisplayContext.GROUND, false, matrixStack, buffer, packedLight, OverlayTexture.NO_OVERLAY, bakedmodel);
+        this.itemRenderer.render(itemstack, ItemDisplayContext.FIRST_PERSON_RIGHT_HAND, false, matrixStack, buffer, packedLight, OverlayTexture.NO_OVERLAY, bakedmodel);
 
         matrixStack.popPose();
         super.render(entity, entityYaw, partialTicks, matrixStack, buffer, packedLight);
@@ -46,6 +46,6 @@ public class ThrowableItemRender extends EntityRenderer<ThrowableItemEntity> {
 
     @Override
     public @NotNull ResourceLocation getTextureLocation(ThrowableItemEntity entity) {
-        return BuiltInRegistries.ITEM.getKey(entity.getItem().getItem());
+        return InventoryMenu.BLOCK_ATLAS;
     }
 }
