@@ -5,22 +5,15 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
-import org.hiedacamellia.camellialib.common.entity.ThrowableItemEntity;
+import net.minecraft.world.item.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public abstract class ThrowableItemWithTooltip extends Item {
-    public ThrowableItemWithTooltip(Properties properties) {
-        super(properties);
+public class AxeItemWithTooltip extends AxeItem {
+
+    public AxeItemWithTooltip(Tier tier, Properties properties) {
+        super(tier, properties);
     }
     @Override
     public void appendHoverText(@NotNull ItemStack itemstack, @NotNull TooltipContext context, @NotNull List<Component> list, @NotNull TooltipFlag flag) {
@@ -35,6 +28,4 @@ public abstract class ThrowableItemWithTooltip extends Item {
             }
         }
     }
-    @Override
-    public abstract InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand);
 }

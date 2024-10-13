@@ -10,7 +10,6 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import org.hiedacamellia.camellialib.common.item.ThrowableItemWithTooltip;
 
 public class ThrowableItemEntity extends ThrowableItemProjectile {
 
@@ -60,10 +59,8 @@ public class ThrowableItemEntity extends ThrowableItemProjectile {
         if (this.level().isClientSide()) return;
 
         Entity entity = result.getEntity();
-        ItemStack itemStack = this.getItem();
-        Item item = itemStack.getItem();
 
-        if (item instanceof ThrowableItemWithTooltip && this.getOwner() instanceof Player player) {
+        if (this.getOwner() instanceof Player player) {
             hitEntity = true;
             entity.hurt(damageSources().playerAttack(player), (float) player.getAttributeValue(Attributes.ATTACK_DAMAGE));
         }
