@@ -24,7 +24,7 @@ public class ItemWithTooltip extends Item {
         if (!Screen.hasShiftDown()) {
             list.add(Component.translatable("tooltip.camellialib.press_shift").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
         } else {
-            String[] description = Component.translatable(key.toLanguageKey()+".desc").getString().split("§n");
+            String[] description = Component.translatable(key.toLanguageKey("item")+".desc").getString().split("§n");
             for (String line : description) {
                 list.add(Component.literal(line));
             }
