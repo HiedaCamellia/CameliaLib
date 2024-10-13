@@ -11,4 +11,6 @@ public class CommonConfig {
             .comment("Set to true to enable debug info")
             .comment("设置为true以启用调试信息")
             .define("debug", true);
+
+    public static final ModConfigSpec SPEC = BUILDER.build();
 }

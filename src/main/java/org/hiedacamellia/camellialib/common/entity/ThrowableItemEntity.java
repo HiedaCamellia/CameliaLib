@@ -2,6 +2,7 @@ package org.hiedacamellia.camellialib.common.entity;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
@@ -15,6 +16,14 @@ public class ThrowableItemEntity extends ThrowableItemProjectile {
 
 
     public ThrowableItemEntity(EntityType<? extends ThrowableItemEntity> entityType, Level level) { super(entityType, level); }
+
+    public ThrowableItemEntity(EntityType<? extends ThrowableItemProjectile> entityType, double x, double y, double z, Level level) {
+        super(entityType, x, y, z, level);
+    }
+
+    public ThrowableItemEntity(EntityType<? extends ThrowableItemProjectile> entityType, LivingEntity shooter, Level level) {
+        super(entityType, shooter, level);
+    }
 
     @Override protected Item getDefaultItem() { return Items.SNOWBALL; }
 
