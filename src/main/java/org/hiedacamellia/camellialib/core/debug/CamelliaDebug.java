@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 
 public class CamelliaDebug {
 
-    private static String prefix = "[§a山茶花核心§r]";
+    private static String prefix = "[%a7a\u5c71\u8336\u82b1\u6838\u5fc3%a7r]";
     private static Boolean debugConfig = CommonConfig.DEBUG.get();
     private static Logger logger = LoggerFactory.getLogger(Camellialib.MODID);
 

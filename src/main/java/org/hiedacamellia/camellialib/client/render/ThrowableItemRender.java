@@ -3,6 +3,7 @@ package org.hiedacamellia.camellialib.client.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.core.registries.BuiltInRegistries;
 import org.hiedacamellia.camellialib.common.entity.ThrowableItemEntity;
+import org.jetbrains.annotations.NotNull;
 import org.joml.Quaternionf;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -44,7 +45,7 @@ public class ThrowableItemRender extends EntityRenderer<ThrowableItemEntity> {
     }
 
     @Override
-    public ResourceLocation getTextureLocation(ThrowableItemEntity entity) {
+    public @NotNull ResourceLocation getTextureLocation(ThrowableItemEntity entity) {
         return BuiltInRegistries.ITEM.getKey(entity.getItem().getItem());
     }
 }
