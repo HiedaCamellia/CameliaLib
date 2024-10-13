@@ -19,7 +19,7 @@ public class ThrowableItemEntity extends ThrowableItemProjectile {
 
     public ThrowableItemEntity(EntityType<? extends ThrowableItemEntity> entityType, Level level) { super(entityType, level); }
 
-
+    public boolean isReturning() { return isReturning; }
     @Override protected Item getDefaultItem() { return Items.SNOWBALL; }
 
     @Override
