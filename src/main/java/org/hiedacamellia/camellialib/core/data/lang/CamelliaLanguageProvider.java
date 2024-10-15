@@ -6,8 +6,8 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.LanguageProvider;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.LanguageProvider;
 
 public abstract class CamelliaLanguageProvider extends LanguageProvider {
 
@@ -33,11 +33,6 @@ public abstract class CamelliaLanguageProvider extends LanguageProvider {
     public void addWithTooltip(MobEffect key, String value, String tooltip) {
         add(key.getDescriptionId(), value);
         add(key.getDescriptionId()+".desc", tooltip);
-    }
-
-    public void addWithTooltip(TagKey<?> key, String value, String tooltip) {
-        add(Tags.getTagTranslationKey(key), value);
-        add(Tags.getTagTranslationKey(key)+".desc", tooltip);
     }
 
     public void addWithTooltip(String key, String value, String tooltip) {

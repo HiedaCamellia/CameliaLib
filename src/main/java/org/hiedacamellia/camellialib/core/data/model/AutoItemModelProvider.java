@@ -4,15 +4,14 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.neoforge.registries.DeferredHolder;
+import net.minecraftforge.client.model.generators.ItemModelProvider;
+import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.stream.Collectors;
 
 public abstract class AutoItemModelProvider extends ItemModelProvider {
 
-    public AutoItemModelProvider(PackOutput output, String modid,ExistingFileHelper helper) {
+    public AutoItemModelProvider(PackOutput output, String modid, ExistingFileHelper helper) {
         super(output, modid, helper);
     }
 

@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.neoforged.fml.loading.FMLEnvironment;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.hiedacamellia.camellialib.Camellialib;
 import org.hiedacamellia.camellialib.core.config.CommonConfig;
 import org.slf4j.Logger;

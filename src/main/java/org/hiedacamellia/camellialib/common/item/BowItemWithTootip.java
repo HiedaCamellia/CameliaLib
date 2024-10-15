@@ -9,8 +9,10 @@ import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class BowItemWithTootip extends BowItem {
@@ -18,8 +20,8 @@ public class BowItemWithTootip extends BowItem {
         super(properties);
     }
     @Override
-    public void appendHoverText(@NotNull ItemStack itemstack, Item.@NotNull TooltipContext context, @NotNull List<Component> list, @NotNull TooltipFlag flag) {
-        super.appendHoverText(itemstack, context, list, flag);
+    public void appendHoverText(@NotNull ItemStack itemstack, @Nullable Level Level, @NotNull List<Component> list, @NotNull TooltipFlag flag) {
+        super.appendHoverText(itemstack, Level, list, flag);
         ResourceLocation key = BuiltInRegistries.ITEM.getKey(itemstack.getItem());
         if (!Screen.hasShiftDown()) {
             list.add(Component.translatable("tooltip.camellialib.press_shift").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));

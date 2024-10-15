@@ -2,7 +2,7 @@ package org.hiedacamellia.camellialib.core.util;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.registries.DeferredHolder;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class RandomItems {
 
-    public static List<ItemStack> getRandomItems(Collection<DeferredHolder<Item, ? extends Item>> entries,int num) {
+    public static List<ItemStack> getRandomItems(Collection<RegistryObject<? extends Item>> entries, int num) {
         List<ItemStack> items = new ArrayList<>();
         List<Integer> indexs = new ArrayList<>();
         for(int i=0;i<num;i++){
@@ -26,7 +26,7 @@ public class RandomItems {
         return items;
     }
 
-    public static List<ItemStack> getRandomItemsWithRandomCount(Collection<DeferredHolder<Item, ? extends Item>> entries,int num,int maxCount){
+    public static List<ItemStack> getRandomItemsWithRandomCount(Collection<RegistryObject<? extends Item>> entries,int num,int maxCount){
         List<ItemStack> items = getRandomItems(entries,num);
         items.forEach(itemStack -> itemStack.setCount((int)(Math.random()*(maxCount-1))+1));
         return items;

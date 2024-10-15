@@ -6,23 +6,26 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class AxeItemWithTooltip extends AxeItem {
 
-    public AxeItemWithTooltip(Tier tier, Properties properties) {
-        super(tier, properties);
+    public AxeItemWithTooltip(Tier tier, float pAttackDamageModifier, float pAttackSpeedModifier, Properties properties) {
+        super(tier, pAttackDamageModifier, pAttackSpeedModifier, properties);
     }
+
     @Override
-    public void appendHoverText(@NotNull ItemStack itemstack, @NotNull TooltipContext context, @NotNull List<Component> list, @NotNull TooltipFlag flag) {
-        super.appendHoverText(itemstack, context, list, flag);
+    public void appendHoverText(@NotNull ItemStack itemstack, @Nullable Level Level, @NotNull List<Component> list, @NotNull TooltipFlag flag) {
+        super.appendHoverText(itemstack, Level, list, flag);
         ResourceLocation key = BuiltInRegistries.ITEM.getKey(itemstack.getItem());
         if (!Screen.hasShiftDown()) {
             list.add(Component.translatable("tooltip.camellialib.press_shift").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
         } else {
-            String[] description = Component.translatable(key.toLanguageKey("item")+".desc").getString().split("§n");
+            String[] description = Component.translatable(key.toLanguageKey("item") + ".desc").getString().split("§n");
             for (String line : description) {
                 list.add(Component.literal(line));
             }
