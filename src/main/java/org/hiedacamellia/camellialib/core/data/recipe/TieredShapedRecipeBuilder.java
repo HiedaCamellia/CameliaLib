@@ -114,7 +114,8 @@ public class TieredShapedRecipeBuilder extends CraftingRecipeBuilder implements 
 
     @Override
     public RecipeBuilder unlockedBy(String s, CriterionTriggerInstance criterionTriggerInstance) {
-        return null;
+        this.advancement.addCriterion(s, criterionTriggerInstance);
+        return this;
     }
 
 
