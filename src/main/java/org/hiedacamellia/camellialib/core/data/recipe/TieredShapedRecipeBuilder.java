@@ -159,7 +159,7 @@ public class TieredShapedRecipeBuilder extends CraftingRecipeBuilder implements 
 
                 for(int i = 0; i < next.length(); ++i) {
                     char c = next.charAt(i);
-                    if ((!this.key.containsKey(c) && c != ' ') || c!='T') {
+                    if ((!this.key.containsKey(c) && c != ' ' && c!='T')) {
                         throw new IllegalStateException("Pattern in recipe " + pId + " uses undefined symbol '" + c + "'");
                     }
 
