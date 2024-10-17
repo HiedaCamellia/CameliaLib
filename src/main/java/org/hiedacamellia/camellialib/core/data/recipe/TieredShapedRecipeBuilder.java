@@ -137,7 +137,7 @@ public class TieredShapedRecipeBuilder extends CraftingRecipeBuilder implements 
         for(int i =0 ;i<this.tiered.size();i++) {
             ResourceLocation resourceLocation = ResourceLocation.tryBuild(pRecipeId.getNamespace(), pRecipeId.getPath()+"_tier"+i);
             this.ensureValid(resourceLocation,i);
-            this.advancement.parent(ROOT_RECIPE_ADVANCEMENT).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(resourceLocation)).rewards(net.minecraft.advancements.AdvancementRewards.Builder.recipe(resourceLocation)).requirements(RequirementsStrategy.OR);
+            this.advancement.parent(ROOT_RECIPE_ADVANCEMENT).addCriterion("has_the_recipe"+"_tier"+i, RecipeUnlockedTrigger.unlocked(resourceLocation)).rewards(net.minecraft.advancements.AdvancementRewards.Builder.recipe(resourceLocation)).requirements(RequirementsStrategy.OR);
             Map<Character, Ingredient> map = Maps.newHashMap(this.key);
             map.put('T', this.tiered.get(i));
             pFinishedRecipeConsumer.accept(new ShapedRecipeBuilder.Result(resourceLocation, this.result.get(i), this.resultStack.get(i).getCount(), this.group == null ? "" : this.group, determineBookCategory(this.category), this.rows, map, this.advancement, resourceLocation.withPrefix("recipes/" + this.category.getFolderName() + "/"), this.showNotification));
