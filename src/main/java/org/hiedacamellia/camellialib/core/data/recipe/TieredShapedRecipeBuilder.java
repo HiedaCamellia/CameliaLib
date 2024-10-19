@@ -24,7 +24,6 @@ import net.minecraft.world.level.ItemLike;
 import javax.annotation.Nullable;
 import java.util.*;
 
-//默认T为Tier替换的物品
 public class TieredShapedRecipeBuilder implements RecipeBuilder {
     private final List<Ingredient> tiered;
     private final RecipeCategory category;
