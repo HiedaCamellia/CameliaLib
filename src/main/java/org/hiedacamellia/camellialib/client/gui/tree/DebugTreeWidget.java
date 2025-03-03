@@ -28,7 +28,7 @@ public class DebugTreeWidget extends TreeWidget<DebugEntry,DebugTreeEntryWidget>
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         boolean v = super.mouseClicked(mouseX, mouseY, button);
-        if(select!=null){
+        if(select!=null&&!select.hasChild()){
             DebugEntry data = select.getData();
             Minecraft.getInstance().setScreen(data.subScreen());
             return true;
