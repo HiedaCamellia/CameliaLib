@@ -14,14 +14,13 @@ import org.slf4j.LoggerFactory;
 
 public class CamelliaDebug {
 
-    private static String prefix = "\u5c71\u8336\u82b1\u6838\u5fc3";
-    private static Boolean debugConfig = CommonConfig.DEBUG.get();
+    private static final String prefix = "\u5c71\u8336\u82b1\u6838\u5fc3";
     public static Logger logger = LoggerFactory.getLogger(Camellialib.MODID);
 
     public static void send(String string) {
         if (FMLEnvironment.dist.isClient()) {
             Minecraft mc = Minecraft.getInstance();
-            if (mc.player != null && debugConfig) {
+            if (mc.player != null && CommonConfig.DEBUG.get()) {
                 mc.player.sendSystemMessage(Component.literal("[")
                         .append(Component.literal(prefix).withStyle(ChatFormatting.GREEN)).append("]").append(string));
             }
@@ -30,7 +29,7 @@ public class CamelliaDebug {
 
     public static void send(String string, Player player) {
         Level level = player.level();
-        if(!level.isClientSide && debugConfig) {
+        if(!level.isClientSide && CommonConfig.DEBUG.get()) {
             player.sendSystemMessage(Component.literal(prefix  + string));
         }
     }
