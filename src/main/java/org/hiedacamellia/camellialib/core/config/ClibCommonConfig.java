@@ -2,7 +2,7 @@ package org.hiedacamellia.camellialib.core.config;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-public class CommonConfig {
+public class ClibCommonConfig {
 
 
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();

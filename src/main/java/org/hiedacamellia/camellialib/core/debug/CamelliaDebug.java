@@ -8,7 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.neoforged.fml.loading.FMLEnvironment;
 import org.hiedacamellia.camellialib.Camellialib;
-import org.hiedacamellia.camellialib.core.config.CommonConfig;
+import org.hiedacamellia.camellialib.core.config.ClibCommonConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +20,7 @@ public class CamelliaDebug {
     public static void send(String string) {
         if (FMLEnvironment.dist.isClient()) {
             Minecraft mc = Minecraft.getInstance();
-            if (mc.player != null && CommonConfig.DEBUG.get()) {
+            if (mc.player != null && ClibCommonConfig.DEBUG.get()) {
                 mc.player.sendSystemMessage(Component.literal("[")
                         .append(Component.literal(prefix).withStyle(ChatFormatting.GREEN)).append("]").append(string));
             }
@@ -29,7 +29,7 @@ public class CamelliaDebug {
 
     public static void send(String string, Player player) {
         Level level = player.level();
-        if(!level.isClientSide && CommonConfig.DEBUG.get()) {
+        if(!level.isClientSide && ClibCommonConfig.DEBUG.get()) {
             player.sendSystemMessage(Component.literal(prefix  + string));
         }
     }

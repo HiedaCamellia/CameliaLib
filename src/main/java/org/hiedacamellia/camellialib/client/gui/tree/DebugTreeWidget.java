@@ -6,6 +6,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import org.hiedacamellia.camellialib.client.debug.DebugEntry;
+import org.hiedacamellia.immersiveui.client.graphic.gui.IUIGuiUtils;
 import org.hiedacamellia.immersiveui.client.gui.component.widget.tree.TreeEntryWidget;
 import org.hiedacamellia.immersiveui.client.gui.component.widget.tree.TreeWidget;
 
@@ -17,6 +18,7 @@ public class DebugTreeWidget extends TreeWidget<DebugEntry,DebugTreeEntryWidget>
         this.dragable = false;
         this.titleHeight=20;
         this.titleWidth+=40;
+        updateWidget();
     }
 
     public static DebugTreeWidget create(List<DebugTreeEntryWidget> root, int x, int y, Component component, Font font){
@@ -37,8 +39,8 @@ public class DebugTreeWidget extends TreeWidget<DebugEntry,DebugTreeEntryWidget>
     @Override
     protected void renderTitle(GuiGraphics guiGraphics, int mouseX, int mouseY, float v){
         RenderSystem.enableBlend();
-        guiGraphics.fill(this.getX(), this.getY(), this.getX() + this.width, this.getY() + font.lineHeight, 0x80AAAAAA);
-        guiGraphics.drawCenteredString(font, this.getMessage(), this.getX()+titleWidth/2, this.getY()+titleHeight/2, 0x000000);
+        guiGraphics.fill(this.getX(), this.getY(), this.getX() + this.width, this.getY() + titleHeight, 0x80AAAAAA);
+        IUIGuiUtils.drawCenteredString(guiGraphics,font, this.getMessage(), this.getX()+this.width/2, this.getY()+titleHeight/2, 0x000000,false);
         RenderSystem.disableBlend();
     }
 

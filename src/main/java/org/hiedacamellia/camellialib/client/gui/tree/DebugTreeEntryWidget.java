@@ -4,6 +4,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import org.hiedacamellia.camellialib.client.debug.DebugEntry;
+import org.hiedacamellia.immersiveui.client.graphic.gui.IUIGuiUtils;
 import org.hiedacamellia.immersiveui.client.gui.component.widget.tree.TreeEntryWidget;
 
 public class DebugTreeEntryWidget extends TreeEntryWidget<DebugEntry> {
@@ -25,11 +26,11 @@ public class DebugTreeEntryWidget extends TreeEntryWidget<DebugEntry> {
     @Override
     protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float v) {
         if(hasChild()) {
-            guiGraphics.drawCenteredString(font,fold?foldComponent:unfoldComponent,this.getX()+foldWidth/2,this.getY()+selfHeight/2,0xFFFFFF);
-            guiGraphics.drawCenteredString(font, getMessage(), this.getX()+foldWidth+selfWidth/2, this.getY()+selfHeight/2, 0xFFFFFF);
+            IUIGuiUtils.drawCenteredString(guiGraphics,font,fold?foldComponent:unfoldComponent,this.getX()+foldWidth/2,this.getY()+selfHeight/2,0xFFFFFF,false);
+            IUIGuiUtils.drawCenteredString(guiGraphics,font, getMessage(), this.getX()+foldWidth+selfWidth/2, this.getY()+selfHeight/2, 0xFFFFFF,false);
         }
         else
-            guiGraphics.drawCenteredString(font, getMessage(), this.getX()+selfWidth/2, this.getY()+selfHeight/2, 0xFFFFFF);
+            IUIGuiUtils.drawCenteredString(guiGraphics,font, getMessage(), this.getX()+selfWidth/2, this.getY()+selfHeight/2, 0xFFFFFF,false);
 
         if(fold) return;
         renderChildren(guiGraphics, mouseX, mouseY, v);
