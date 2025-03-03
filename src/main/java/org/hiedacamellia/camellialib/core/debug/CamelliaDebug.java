@@ -16,11 +16,7 @@ public class CamelliaDebug {
 
     private static String prefix = "\u5c71\u8336\u82b1\u6838\u5fc3";
     private static Boolean debugConfig = CommonConfig.DEBUG.get();
-    private static Logger logger = LoggerFactory.getLogger(Camellialib.MODID);
-
-    public static Logger getLogger(){
-        return logger;
-    }
+    public static Logger logger = LoggerFactory.getLogger(Camellialib.MODID);
 
     public static void send(String string) {
         if (FMLEnvironment.dist.isClient()) {
