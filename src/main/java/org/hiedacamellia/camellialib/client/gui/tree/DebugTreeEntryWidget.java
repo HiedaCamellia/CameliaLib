@@ -18,8 +18,7 @@ public class DebugTreeEntryWidget extends TreeEntryWidget<DebugEntry> {
     public static DebugTreeEntryWidget create(DebugEntry data, Component component, Font font){
         DebugTreeEntryWidget widget = new DebugTreeEntryWidget(component, font);
         widget.setData(data);
-        widget.width = font.width(component);
-        widget.height = font.lineHeight;
+        widget.updateWidget();
         return widget;
     }
 
