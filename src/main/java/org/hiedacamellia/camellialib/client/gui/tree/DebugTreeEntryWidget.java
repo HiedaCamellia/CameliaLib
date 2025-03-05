@@ -26,10 +26,10 @@ public class DebugTreeEntryWidget extends TreeEntryWidget<DebugEntry> {
     protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float v) {
         if(hasChild()) {
             IUIGuiUtils.drawCenteredString(guiGraphics,font,fold?foldComponent:unfoldComponent,this.getX()+foldWidth/2,this.getY()+selfHeight/2,0xFFFFFF,false);
-            IUIGuiUtils.drawCenteredString(guiGraphics,font, getMessage(), this.getX()+foldWidth+selfWidth/2, this.getY()+selfHeight/2, 0xFFFFFF,false);
+            guiGraphics.drawString(font, getMessage().getVisualOrderText(), (float) this.getX()+foldWidth, (float)this.getY()+(float)selfHeight/2-(float)font.lineHeight/2, 0xFFFFFF,false);
         }
         else
-            IUIGuiUtils.drawCenteredString(guiGraphics,font, getMessage(), this.getX()+selfWidth/2, this.getY()+selfHeight/2, 0xFFFFFF,false);
+            guiGraphics.drawString(font, getMessage().getVisualOrderText(), (float) this.getX(), (float)this.getY()+(float)selfHeight/2-(float)font.lineHeight/2, 0xFFFFFF,false);
 
         if(fold) return;
         renderChildren(guiGraphics, mouseX, mouseY, v);
